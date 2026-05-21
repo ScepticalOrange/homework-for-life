@@ -9,7 +9,6 @@ export default class HfLPlugin extends Plugin {
 	private writeService!: WriteService;
 
 	async onload() {
-		console.log("HfL: plugin loaded");
 		await this.loadSettings();
 
 		this.writeService = new WriteService(this.app, () => this.settings);
@@ -31,9 +30,7 @@ export default class HfLPlugin extends Plugin {
 		this.addSettingTab(new HfLSettingTab(this.app, this));
 	}
 
-	onunload() {
-		console.log("HfL: plugin unloaded");
-	}
+	onunload() {}
 
 	private openCaptureModal() {
 		new CaptureModal(this.app, this.writeService).open();
