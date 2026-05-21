@@ -15,11 +15,21 @@ Obsidian plugin for low-friction daily story-capture, inspired by Matthew Dicks'
 
 ## Install
 
-Until this is in the community plugin store:
+This plugin is currently in submission review for the official Obsidian Community Plugin Store. Until then:
 
-1. Build the plugin: `npm install && npm run install:prod` (writes to a hard-coded vault path; edit `package.json` to your own path)
-2. Or copy `manifest.json`, `main.js`, and `styles.css` from a release into `<vault>/.obsidian/plugins/hfl/`
+1. Download `manifest.json`, `main.js`, and `styles.css` from the [latest release](https://github.com/ScepticalOrange/homework-for-life/releases/latest)
+2. Copy them into `<vault>/.obsidian/plugins/homework-for-life/`
 3. Enable in Obsidian → Settings → Community plugins
+
+## Build from source
+
+```
+npm install
+npm run build
+```
+Outputs `dist/main.js`, `dist/manifest.json`, `dist/styles.css`.
+
+The `install:prod` script writes directly to a hard-coded vault path — for personal dev use only; edit `package.json` first.
 
 ## Settings
 
