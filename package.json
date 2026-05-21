@@ -1,13 +1,13 @@
 {
-	"name": "hfl-plugin",
+	"name": "homework-for-life",
 	"version": "0.1.0",
 	"description": "Obsidian plugin: Capture daily story-worthy moments (Homework for Life).",
 	"main": "main.js",
 	"type": "module",
 	"scripts": {
-		"dev": "cross-env HFL_OUT=\"C:/Users/Chris/Claude_Obsidian/.obsidian/plugins/hfl\" node esbuild.config.mjs",
+		"dev": "cross-env HFL_OUT=\"C:/Users/Chris/Claude_Obsidian/.obsidian/plugins/homework-for-life\" node esbuild.config.mjs",
 		"build": "tsc -noEmit -skipLibCheck && cross-env HFL_OUT=\"./dist\" node esbuild.config.mjs production",
-		"install:prod": "tsc -noEmit -skipLibCheck && cross-env HFL_OUT=\"C:/Users/Chris/OneDrive/Obsidian/Vault/Second Brain/.obsidian/plugins/hfl\" node esbuild.config.mjs production"
+		"install:prod": "tsc -noEmit -skipLibCheck && cross-env HFL_OUT=\"C:/Users/Chris/OneDrive/Obsidian/Vault/Second Brain/.obsidian/plugins/homework-for-life\" node esbuild.config.mjs production"
 	},
 	"license": "MIT",
 	"devDependencies": {

@@ -1,9 +1,10 @@
 {
-	"id": "hfl",
+	"id": "homework-for-life",
 	"name": "Homework for Life",
 	"version": "0.1.0",
-	"minAppVersion": "1.0.0",
+	"minAppVersion": "1.5.0",
 	"description": "Capture daily story-worthy moments into monthly markdown files. Inspired by Matthew Dicks' Homework for Life method.",
-	"author": "Chris",
+	"author": "Christian Fischer",
+	"authorUrl": "https://github.com/ScepticalOrange",
 	"isDesktopOnly": false
 }
