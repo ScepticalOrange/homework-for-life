@@ -1,7 +1,7 @@
 {
 	"id": "homework-for-life",
 	"name": "Homework for Life",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"minAppVersion": "1.5.0",
 	"description": "Capture daily story-worthy moments into monthly markdown files. Inspired by Matthew Dicks' Homework for Life method.",
 	"author": "Christian Fischer",

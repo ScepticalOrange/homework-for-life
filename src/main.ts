@@ -33,7 +33,7 @@ export default class HfLPlugin extends Plugin {
 	onunload() {}
 
 	private openCaptureModal() {
-		new CaptureModal(this.app, this.writeService).open();
+		new CaptureModal(this.app, this.writeService, () => this.settings).open();
 	}
 
 	async loadSettings() {
