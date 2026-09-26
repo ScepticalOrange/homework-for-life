@@ -2,6 +2,7 @@ import { App, TFile, normalizePath } from "obsidian";
 import { buildFilename, parseLocalDate } from "../utils/date";
 import { detectFormat, createHandler } from "../format/factory";
 import { HfLSettings } from "../types";
+import { t } from "../i18n";
 
 export interface WriteResult {
 	created: boolean;
@@ -13,14 +14,15 @@ export class WriteService {
 	constructor(private app: App, private getSettings: () => HfLSettings) {}
 
 	async append(date: string, moments: string[]): Promise<WriteResult> {
+		const settings = this.getSettings();
+		const s = t(settings);
 		if (moments.length === 0) {
-			throw new Error("No moments to save");
+			throw new Error(s.errorNoMoments);
 		}
 		if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
-			throw new Error(`Invalid date: ${date}`);
+			throw new Error(s.errorInvalidDate(date));
 		}
 
-		const settings = this.getSettings();
 		const dateObj = parseLocalDate(date);
 		const filename = buildFilename(dateObj, settings.filename_pattern);
 		const path = normalizePath(`${settings.hfl_folder}/${filename}.md`);
@@ -38,7 +40,7 @@ export class WriteService {
 		}
 
 		if (!(existing instanceof TFile)) {
-			throw new Error(`Path ${path} is not a file`);
+			throw new Error(s.errorNotAFile(path));
 		}
 
 		const content = await this.app.vault.read(existing);

@@ -2,6 +2,7 @@ import { FormatHandler } from "./handler";
 import { FormatType, HfLSettings } from "../types";
 import { wikilinkDate } from "../utils/date";
 import { splitFrontmatter } from "../utils/markdown";
+import { t } from "../i18n";
 
 // Also matches the German header used by 0.1.0 so existing files are still detected.
 const TABLE_HEADER = /^\| *(Date|Datum) *\| *(Moment|Erlebnis) *\|/m;
@@ -63,7 +64,7 @@ export class TableFormatHandler implements FormatHandler {
 		if (sepIdx === -1) {
 			const h1Idx = lines.findIndex((l) => /^#\s/.test(l));
 			const insertAt = h1Idx === -1 ? 0 : h1Idx + 1;
-			const skeleton = ["", "| Date | Moment |", "|------|--------|", newRow];
+			const skeleton = ["", this.header(), this.headerSeparator(), newRow];
 			lines.splice(insertAt, 0, ...skeleton);
 			return fm + lines.join("\n");
 		}
@@ -87,11 +88,19 @@ export class TableFormatHandler implements FormatHandler {
 		return [
 			`# Homework for Life – ${filename}`,
 			"",
-			"| Date | Moment |",
-			"|------|--------|",
+			this.header(),
+			this.headerSeparator(),
 			`| ${dateLink} | ${cellText} |`,
 			"",
 		].join("\n");
+	}
+
+	private header(): string {
+		return t(this.settings).tableHeader;
+	}
+
+	private headerSeparator(): string {
+		return this.header().replace(/[^|]/g, "-");
 	}
 
 	private momentSeparator(): string {

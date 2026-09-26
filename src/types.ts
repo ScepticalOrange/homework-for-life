@@ -1,6 +1,7 @@
 export type FormatType = "table" | "headings";
 export type AppendPosition = "top" | "bottom";
 export type MultiMomentStyle = "br" | "br_bullets";
+export type Language = "auto" | "en" | "de";
 
 export interface HfLSettings {
 	hfl_folder: string;
@@ -8,6 +9,7 @@ export interface HfLSettings {
 	append_position: AppendPosition;
 	output_format: FormatType;
 	multi_moment_style: MultiMomentStyle;
+	language: Language;
 }
 
 export const DEFAULT_SETTINGS: HfLSettings = {
@@ -16,4 +18,5 @@ export const DEFAULT_SETTINGS: HfLSettings = {
 	append_position: "top",
 	output_format: "table",
 	multi_moment_style: "br",
+	language: "auto",
 };

@@ -35,6 +35,7 @@ The `install:prod` script writes directly to a hard-coded vault path — for per
 
 | Setting | Default | What it does |
 |---|---|---|
+| Language | `Auto` | UI language and table header of new files. Auto follows Obsidian's language: German → Deutsch, anything else → English. |
 | Folder | `HfL` | Where the monthly files are stored |
 | Filename pattern | `YYYY-MM` | Tokens: `YYYY`, `MM`, `Q` (quarter). Use `YYYY-Q` for quarterly files. |
 | Append position | `top` | Whether new days appear at the top or bottom of the file |
