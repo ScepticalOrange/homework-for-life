@@ -15,8 +15,8 @@ export class HfLSettingTab extends PluginSettingTab {
 		containerEl.empty();
 
 		new Setting(containerEl)
-			.setName("Ordner")
-			.setDesc("Wo die Monatsdateien gespeichert werden.")
+			.setName("Folder")
+			.setDesc("Where the monthly files are stored.")
 			.addText((text) =>
 				text
 					.setPlaceholder(DEFAULT_SETTINGS.hfl_folder)
@@ -28,8 +28,8 @@ export class HfLSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Dateinamen-Muster")
-			.setDesc("Tokens: YYYY = Jahr, MM = Monat, Q = Quartal. Default: YYYY-MM.")
+			.setName("Filename pattern")
+			.setDesc("Tokens: YYYY = year, MM = month, Q = quarter. Default: YYYY-MM.")
 			.addText((text) =>
 				text
 					.setPlaceholder(DEFAULT_SETTINGS.filename_pattern)
@@ -41,12 +41,12 @@ export class HfLSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Position neuer Einträge")
-			.setDesc("Neue Tage oben oder unten in der Datei.")
+			.setName("Position of new entries")
+			.setDesc("Whether new days are added at the top or bottom of the file.")
 			.addDropdown((dd) =>
 				dd
-					.addOption("top", "Oben")
-					.addOption("bottom", "Unten")
+					.addOption("top", "Top")
+					.addOption("bottom", "Bottom")
 					.setValue(this.plugin.settings.append_position)
 					.onChange(async (v) => {
 						this.plugin.settings.append_position = v as AppendPosition;
@@ -55,12 +55,12 @@ export class HfLSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Format für neue Dateien")
-			.setDesc("Tabelle oder Headings + Bullets. Bestehende Dateien behalten ihr Format.")
+			.setName("Format for new files")
+			.setDesc("Table or headings + bullets. Existing files keep their format.")
 			.addDropdown((dd) =>
 				dd
-					.addOption("table", "Tabelle")
-					.addOption("headings", "Headings + Bullets")
+					.addOption("table", "Table")
+					.addOption("headings", "Headings + bullets")
 					.setValue(this.plugin.settings.output_format)
 					.onChange(async (v) => {
 						this.plugin.settings.output_format = v as FormatType;
@@ -69,12 +69,12 @@ export class HfLSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName("Multi-Moment in Tabelle")
-			.setDesc("Wie mehrere Momente eines Tages in einer Tabellen-Zelle dargestellt werden. Nur beim Tabellen-Format relevant.")
+			.setName("Multiple moments in table")
+			.setDesc("How multiple moments of one day are shown in a table cell. Only applies to the table format.")
 			.addDropdown((dd) =>
 				dd
-					.addOption("br", "<br> nur")
-					.addOption("br_bullets", "<br> mit • Bullet")
+					.addOption("br", "<br> only")
+					.addOption("br_bullets", "<br> with • bullet")
 					.setValue(this.plugin.settings.multi_moment_style)
 					.onChange(async (v) => {
 						this.plugin.settings.multi_moment_style = v as MultiMomentStyle;

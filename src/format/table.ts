@@ -3,7 +3,8 @@ import { FormatType, HfLSettings } from "../types";
 import { wikilinkDate } from "../utils/date";
 import { splitFrontmatter } from "../utils/markdown";
 
-const TABLE_HEADER = /^\| *Datum *\| *Erlebnis *\|/m;
+// Also matches the German header used by 0.1.0 so existing files are still detected.
+const TABLE_HEADER = /^\| *(Date|Datum) *\| *(Moment|Erlebnis) *\|/m;
 const TABLE_SEP = /^\|[\s\-:|]+\|/;
 
 export class TableFormatHandler implements FormatHandler {
@@ -62,7 +63,7 @@ export class TableFormatHandler implements FormatHandler {
 		if (sepIdx === -1) {
 			const h1Idx = lines.findIndex((l) => /^#\s/.test(l));
 			const insertAt = h1Idx === -1 ? 0 : h1Idx + 1;
-			const skeleton = ["", "| Datum | Erlebnis |", "|-------|----------|", newRow];
+			const skeleton = ["", "| Date | Moment |", "|------|--------|", newRow];
 			lines.splice(insertAt, 0, ...skeleton);
 			return fm + lines.join("\n");
 		}
@@ -86,8 +87,8 @@ export class TableFormatHandler implements FormatHandler {
 		return [
 			`# Homework for Life – ${filename}`,
 			"",
-			"| Datum | Erlebnis |",
-			"|-------|----------|",
+			"| Date | Moment |",
+			"|------|--------|",
 			`| ${dateLink} | ${cellText} |`,
 			"",
 		].join("\n");

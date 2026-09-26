@@ -17,16 +17,16 @@ export class CaptureModal extends Modal {
 		contentEl.createEl("h2", { text: "Homework for Life" });
 
 		const dateRow = contentEl.createDiv("hfl-row");
-		dateRow.createEl("label", { text: "Datum", attr: { for: "hfl-date" } });
+		dateRow.createEl("label", { text: "Date", attr: { for: "hfl-date" } });
 		this.dateInput = dateRow.createEl("input", {
 			type: "date",
 			attr: { id: "hfl-date", value: formatLocalDate() },
 		});
 
 		const textWrap = contentEl.createDiv();
-		textWrap.createEl("label", { text: "Was war heute?" });
+		textWrap.createEl("label", { text: "What happened today?" });
 		this.textarea = textWrap.createEl("textarea", {
-			attr: { rows: "6", placeholder: "Ein Moment pro Zeile…" },
+			attr: { rows: "6", placeholder: "One moment per line…" },
 		});
 		this.textarea.addEventListener("keydown", (e) => {
 			if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
@@ -36,14 +36,14 @@ export class CaptureModal extends Modal {
 		});
 
 		const hint = textWrap.createDiv("hfl-hint");
-		hint.setText("Eine Zeile = ein Moment. Cmd/Ctrl+Enter zum Speichern.");
+		hint.setText("One line = one moment. Cmd/Ctrl+Enter to save.");
 
 		const actions = contentEl.createDiv("hfl-actions");
-		const cancelBtn = actions.createEl("button", { text: "Abbrechen" });
+		const cancelBtn = actions.createEl("button", { text: "Cancel" });
 		cancelBtn.onclick = () => this.close();
 
 		const submitBtn = actions.createEl("button", {
-			text: "Speichern",
+			text: "Save",
 			cls: "mod-cta",
 		});
 		submitBtn.onclick = () => this.submit();
@@ -60,28 +60,28 @@ export class CaptureModal extends Modal {
 			.filter((l) => l.length > 0);
 
 		if (!date) {
-			new Notice("HfL: Datum fehlt");
+			new Notice("HfL: Date missing");
 			return;
 		}
 		if (moments.length === 0) {
-			new Notice("HfL: Mindestens einen Moment eingeben");
+			new Notice("HfL: Enter at least one moment");
 			return;
 		}
 
 		this.submitting = true;
 		try {
 			const result = await this.writeService.append(date, moments);
-			const word = moments.length === 1 ? "Moment" : "Momente";
+			const word = moments.length === 1 ? "moment" : "moments";
 			const verb = result.created
-				? `neue Datei + ${moments.length} ${word}`
+				? `new file + ${moments.length} ${word}`
 				: result.appendedToExistingDay
-				? `${moments.length} ${word} an ${date} ergänzt`
-				: `${moments.length} ${word} für ${date} eingetragen`;
+				? `${moments.length} ${word} added to ${date}`
+				: `${moments.length} ${word} saved for ${date}`;
 			new Notice(`HfL: ${verb}`);
 			this.close();
 		} catch (err) {
 			console.error("HfL: write failed", err);
-			const msg = err instanceof Error ? err.message : "Speichern fehlgeschlagen";
+			const msg = err instanceof Error ? err.message : "Save failed";
 			new Notice(`HfL: ${msg}`);
 		} finally {
 			this.submitting = false;

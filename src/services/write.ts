@@ -14,10 +14,10 @@ export class WriteService {
 
 	async append(date: string, moments: string[]): Promise<WriteResult> {
 		if (moments.length === 0) {
-			throw new Error("Keine Momente zum Speichern");
+			throw new Error("No moments to save");
 		}
 		if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
-			throw new Error(`Ungültiges Datum: ${date}`);
+			throw new Error(`Invalid date: ${date}`);
 		}
 
 		const settings = this.getSettings();
@@ -38,7 +38,7 @@ export class WriteService {
 		}
 
 		if (!(existing instanceof TFile)) {
-			throw new Error(`Pfad ${path} ist keine Datei`);
+			throw new Error(`Path ${path} is not a file`);
 		}
 
 		const content = await this.app.vault.read(existing);
